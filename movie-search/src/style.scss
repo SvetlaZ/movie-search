@@ -17,6 +17,7 @@ h1 {
 main {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 form {
@@ -27,6 +28,35 @@ form {
 
 input {
   width: 70%;
+}
+
+.card {
+  width: 100px;
+  height: 200px;
+}
+
+.swiper {
+  position: relative;
+  margin-top: 20px;
+}
+
+.swiper-container {
+  width: 90%;
+  height: 300px;
+}
+
+.swiper-slide {
+  background-color: rgb(72, 157, 255);
+  border: 5px solid #000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.col {
+  width: 150px;
+  height: 200px;
+  background-color: #2c2774;
 }
 
 footer {
