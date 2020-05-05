@@ -1,70 +1,8 @@
 import './style.scss';
-import Swiper from 'swiper';
+import mySwiper from './modules/mySwiper';
+import createCard from './modules/creator';
 
-const mySwiper = new Swiper('.swiper-container', {
-
-  direction: 'horizontal',
-  // loop: true,
-  initialSlide: 1,
-
-  pagination: {
-    el: '.swiper-pagination',
-    dynamicBullets: true,
-    clickable: true,
-  },
-
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-});
-
-mySwiper.slideTo(-1);
-
-mySwiper.appendSlide([
-  '<div class="swiper-slide slide-1"></div>',
-  '<div class="swiper-slide slide-2"></div>',
-  '<div class="swiper-slide slide-3"></div>',
-  '<div class="swiper-slide slide-4"></div>',
-  '<div class="swiper-slide slide-5"></div>',
-]);
-
-// в отдельный модуль
-function createBlock(type, classname, innerText) {
-  const newBlock = document.createElement(type);
-  newBlock.classList.add(classname);
-  newBlock.innerText = innerText;
-
-  return newBlock;
-}
-
-const swipperWrapper = document.querySelector('.slide-1');
-// swipperWrapper = document.querySelector('.slide-2');
-
-
-// в отдельный модуль
-function createCard(title, poster, year, rating) {
-  const card = createBlock('div', 'card', '');
-  swipperWrapper.append(card);
-
-  const cardName = createBlock('p', 'card-name', title);
-  card.append(cardName);
-
-  const cardPoster = createBlock('div', 'card-poster', '');
-  cardPoster.style = `background-image: url(${poster})`;
-  card.append(cardPoster);
-
-  const cardYear = createBlock('p', 'card-year', year);
-  card.append(cardYear);
-
-  const cardRaiting = createBlock('p', 'card-raiting', rating);
-  card.append(cardRaiting);
-
-  mySwiper.update();
-  mySwiper.navigation.update();
-}
-
-async function getMovieTitle(nameMovie) {
+async function getMovieCard(nameMovie) {
   const url = `https://www.omdbapi.com/?s=${nameMovie}&apikey=264bae6c`;
 
   fetch(url)
@@ -79,6 +17,8 @@ async function getMovieTitle(nameMovie) {
           console.log(data.Poster);
           console.log(data.imdbRating);
           createCard(data.Title, data.Poster, data.Year, data.imdbRating);
+          mySwiper.update();
+          mySwiper.navigation.update();
         });
     });
 
@@ -88,4 +28,4 @@ async function getMovieTitle(nameMovie) {
 }
 
 // const request = document.querySelector('#search').value;
-getMovieTitle('love');
+getMovieCard('love');
