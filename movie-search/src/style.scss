@@ -30,11 +30,6 @@ input {
   width: 70%;
 }
 
-.card {
-  width: 100px;
-  height: 200px;
-}
-
 .swiper {
   position: relative;
   margin-top: 20px;
@@ -42,7 +37,7 @@ input {
 
 .swiper-container {
   width: 90%;
-  height: 300px;
+  height: 500px;
 }
 
 .swiper-slide {
@@ -53,10 +48,21 @@ input {
   align-items: center;
 }
 
-.col {
+.card-name {
+  font-weight: 700;
+  text-align: center;
+}
+
+.card-poster {
   width: 150px;
   height: 200px;
   background-color: #2c2774;
+  background-size: cover;
+}
+
+.card-year, .card-raiting {
+  margin: 5px;
+  text-align: center;
 }
 
 footer {
