@@ -51,6 +51,9 @@ input {
 .card-name {
   font-weight: 700;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-poster {
@@ -58,6 +61,7 @@ input {
   height: 200px;
   background-color: #2c2774;
   background-size: cover;
+  background-position: center;
 }
 
 .card-year, .card-raiting {

@@ -1,31 +1,35 @@
 import './style.scss';
-import mySwiper from './modules/mySwiper';
 import createCard from './modules/creator';
+import MySwiper from './modules/mySwiper';
 
+const keyImdb = 'apikey=264bae6c';
+const swiper = new MySwiper();
+swiper.init();
 async function getMovieCard(nameMovie) {
-  const url = `https://www.omdbapi.com/?s=${nameMovie}&apikey=264bae6c`;
+  const url = `https://www.omdbapi.com/?s=${nameMovie}&${keyImdb}`;
 
   fetch(url)
     .then((response) => response.json())
     .then(({ Search }) => {
-      console.log(Search);
-      fetch(`https://www.omdbapi.com/?i=${Search[0].imdbID}&apikey=264bae6c`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data.Title);
-          console.log(data.Year);
-          console.log(data.Poster);
-          console.log(data.imdbRating);
-          createCard(data.Title, data.Poster, data.Year, data.imdbRating);
-          mySwiper.update();
-          mySwiper.navigation.update();
-        });
+      for (let i = 0; i < Search.length; i += 1) {
+        if (i % 4 === 0) {
+          swiper.createSlide();
+        }
+        const slide = swiper.getSlidecount();
+        fetch(`https://www.omdbapi.com/?i=${Search[i].imdbID}&${keyImdb}`)
+          .then((response) => response.json())
+          .then((data) => {
+            createCard(data.Title, data.Poster, data.Year, data.imdbRating, data.imdbID, slide);
+          });
+      }
     });
-
-// mySwiper.appendSlide([
-//   `<div class="swiper-slide">${data.Search[0].Title}</div>`,
-// ]);
 }
 
-// const request = document.querySelector('#search').value;
-getMovieCard('love');
+document.querySelector('.form').onsubmit = (event) => {
+  event.preventDefault();
+  swiper.removeSlides();
+  const request = document.querySelector('#search').value;
+  getMovieCard(request);
+};
+
+export default getMovieCard;

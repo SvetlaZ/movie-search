@@ -1,31 +1,38 @@
 import Swiper from 'swiper';
 
-const mySwiper = new Swiper('.swiper-container', {
+function MySwiper() {
+  let slides = 0;
+  let swiper;
 
-  direction: 'horizontal',
-  // loop: true,
-  initialSlide: 1,
+  this.init = () => {
+    swiper = new Swiper('.swiper-container', {
+      direction: 'horizontal',
+      initialSlide: 1,
 
-  pagination: {
-    el: '.swiper-pagination',
-    dynamicBullets: true,
-    clickable: true,
-  },
+      pagination: {
+        el: '.swiper-pagination',
+        dynamicBullets: true,
+        clickable: true,
+      },
 
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-});
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
 
-mySwiper.slideTo(-1);
-
-mySwiper.appendSlide([
-  '<div class="swiper-slide slide-1"></div>',
-  '<div class="swiper-slide slide-2"></div>',
-  '<div class="swiper-slide slide-3"></div>',
-  '<div class="swiper-slide slide-4"></div>',
-  '<div class="swiper-slide slide-5"></div>',
-]);
-
-export default mySwiper;
+    swiper.slideTo(-1);
+  };
+  this.createSlide = () => {
+    slides += 1;
+    swiper.appendSlide([`<div class="swiper-slide slide-${slides}"></div>`]);
+    swiper.update();
+    swiper.navigation.update();
+  };
+  this.removeSlides = () => {
+    slides = 0;
+    swiper.removeAllSlides();
+  };
+  this.getSlidecount = () => slides;
+}
+export default MySwiper;

@@ -1,5 +1,3 @@
-import mySwiper from './mySwiper';
-
 function createBlock(type, classname, innerText) {
   const newBlock = document.createElement(type);
   newBlock.classList.add(classname);
@@ -8,12 +6,14 @@ function createBlock(type, classname, innerText) {
   return newBlock;
 }
 
-const swipperWrapper = document.querySelector('.slide-1');
-function createCard(title, poster, year, rating) {
+// const swipperWrapper = document.querySelectorAll('.swiper-slide');
+function createCard(title, poster, year, rating, id, slide) {
+  const swipperWrapper = document.querySelector(`.swiper-slide.slide-${slide}`);
   const card = createBlock('div', 'card', '');
   swipperWrapper.append(card);
 
-  const cardName = createBlock('p', 'card-name', title);
+  const cardName = createBlock('a', 'card-name', title);
+  cardName.href = `https://www.imdb.com/title/${id}/videogallery/`;
   card.append(cardName);
 
   const cardPoster = createBlock('div', 'card-poster', '');
@@ -25,6 +25,8 @@ function createCard(title, poster, year, rating) {
 
   const cardRaiting = createBlock('p', 'card-raiting', rating);
   card.append(cardRaiting);
+
+  return card;
 }
 
 export default createCard;
