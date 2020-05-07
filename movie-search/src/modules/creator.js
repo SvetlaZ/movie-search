@@ -1,3 +1,5 @@
+import mySwiper from './mySwiper';
+
 function createBlock(type, classname, innerText) {
   const newBlock = document.createElement(type);
   newBlock.classList.add(classname);
@@ -6,27 +8,31 @@ function createBlock(type, classname, innerText) {
   return newBlock;
 }
 
-// const swipperWrapper = document.querySelectorAll('.swiper-slide');
-function createCard(title, poster, year, rating, id, slide) {
-  const swipperWrapper = document.querySelector(`.swiper-slide.slide-${slide}`);
+function createCard(movie) {
+  const {
+    Title,
+    Poster,
+    Year,
+    imdbRating,
+    imdbID,
+  } = movie;
+  const swipperWrapper = document.querySelector('.slide-1');
   const card = createBlock('div', 'card', '');
   swipperWrapper.append(card);
 
-  const cardName = createBlock('a', 'card-name', title);
-  cardName.href = `https://www.imdb.com/title/${id}/videogallery/`;
+  const cardName = createBlock('a', 'card-name', Title);
+  cardName.href = `https://www.imdb.com/title/${imdbID}/videogallery/`;
   card.append(cardName);
 
   const cardPoster = createBlock('div', 'card-poster', '');
-  cardPoster.style = `background-image: url(${poster})`;
+  cardPoster.style = `background-image: url(${Poster})`;
   card.append(cardPoster);
 
-  const cardYear = createBlock('p', 'card-year', year);
+  const cardYear = createBlock('p', 'card-year', Year);
   card.append(cardYear);
 
-  const cardRaiting = createBlock('p', 'card-raiting', rating);
+  const cardRaiting = createBlock('p', 'card-raiting', imdbRating);
   card.append(cardRaiting);
-
-  return card;
 }
 
-export default createCard;
+export { createBlock, createCard };
