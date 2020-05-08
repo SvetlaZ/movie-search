@@ -26,7 +26,9 @@ function createCard(movie) {
   card.append(cardName);
 
   const cardPoster = createBlock('div', 'card-poster', '');
-  cardPoster.style = `background-image: url(${Poster})`;
+  if (Poster !== 'N/A') {
+    cardPoster.style = `background-image: url(${Poster})`;
+  }
   card.append(cardPoster);
 
   const cardYear = createBlock('p', 'card-year', Year);

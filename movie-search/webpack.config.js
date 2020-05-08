@@ -15,6 +15,12 @@ module.exports = {
           fallback: 'style-loader',
           use: ['css-loader', 'sass-loader']
         })
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+            'file-loader?name=assets/[ext]/[name].[ext]',
+        ],
       }
     ]
   },
