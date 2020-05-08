@@ -57,10 +57,4 @@ const mySwiper = new Swiper('.swiper-container', {
   },
 });
 
-mySwiper.slideTo(-1);
-
-mySwiper.appendSlide([
-  '<div class="swiper-slide slide-1"></div>',
-]);
-
 export default mySwiper;

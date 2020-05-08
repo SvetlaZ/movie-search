@@ -16,12 +16,13 @@ function createCard(movie) {
     imdbRating,
     imdbID,
   } = movie;
-  const swipperWrapper = document.querySelector('.slide-1');
+  const lastSlide = document.querySelector('.swiper-slide:last-child');
   const card = createBlock('div', 'card', '');
-  swipperWrapper.append(card);
+  lastSlide.append(card);
 
   const cardName = createBlock('a', 'card-name', Title);
   cardName.href = `https://www.imdb.com/title/${imdbID}/videogallery/`;
+  cardName.target = '_blank';
   card.append(cardName);
 
   const cardPoster = createBlock('div', 'card-poster', '');
