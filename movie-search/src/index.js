@@ -9,11 +9,12 @@ const searchUrl = (name, page) => `https://www.omdbapi.com/?s=${name}&page=${pag
 const getMovieUrl = (name) => `https://www.omdbapi.com/?i=${name}&apikey=${imdbApiKey}`; // берем title, poster, year, raiting
 const input = document.querySelector('#search');
 input.focus();
-const numbCardsOnSlide = 4;
+const numbCardsOnSlide = 1;
 const resultLine = document.querySelector('.response');
 const buttonNext = document.querySelector('.swiper-button-next');
 const preloader = document.querySelector('.preloader');
-let page;
+const penultimateSlide = 5;
+let page = 0;
 
 const getMovies = async (name) => {
   const response = await fetch(searchUrl(name, page));
@@ -23,9 +24,10 @@ const getMovies = async (name) => {
     mySwiper.virtual.removeAllSlides();
   }
   localStorage.setItem('response', name);
+
   if (totalResults) {
     resultLine.innerText = `${totalResults} response for this request.`;
-    // console.log('Search: ', Search.map((movie) => movie.imdbID));
+
     const movies = await Promise.all(
       Search.map((movie) => fetch(getMovieUrl(movie.imdbID))
         .then((movieResponse) => movieResponse.json())),
@@ -42,11 +44,13 @@ const getMovies = async (name) => {
       }
       return createCard(movie);
     });
-  } else if (!isCyrillic(name)) {
-    console.log(name);
+  } else {
+    console.log('else: ', name);
+    console.log('totaleResElse: ', totalResults);
     resultLine.innerText = 'No one result founded for this request.';
-    preloader.classList.add('hidden');
   }
+
+  preloader.classList.remove('active');
 };
 
 function isCyrillic(text) {
@@ -64,7 +68,6 @@ async function getTranslate(word) {
 }
 
 async function submitForm() {
-  preloader.classList.remove('hidden');
   const request = input.value;
   let word = request;
 
@@ -73,9 +76,9 @@ async function submitForm() {
     // console.dir(translateWord);
     word = translateWord.text[0];
     resultLine.innerText = `No one result founded for ${request}, search for ${word}`;
-    // preloader.classList.add('hidden');
     resultLine.onclick = () => {
       input.value = word;
+      page = 1;
       getMovies(word);
     };
     return;
@@ -85,30 +88,25 @@ async function submitForm() {
   getMovies(word);
 }
 
+function getNextSlide() {
+  console.log('active slide', mySwiper.activeIndex);
+  const slideCount = document.querySelector('.swiper-wrapper').childElementCount;
+console.log('slideCount', slideCount);
+  if (slideCount - mySwiper.activeIndex <= penultimateSlide) {
+    const request = input.value;
+    page += 1;
+    getMovies(request);
+  }
+}
+
 document.querySelector('.form').onsubmit = (event) => {
   event.preventDefault();
+
+  preloader.classList.add('active');
   submitForm();
 };
 
-buttonNext.onclick = () => {
-  console.log('active slide', mySwiper.activeIndex);
-  const slideCount = document.querySelector('.swiper-wrapper').childElementCount;
-
-  if (slideCount - mySwiper.activeIndex === 2) {
-    const request = input.value;
-    page += 1;
-    getMovies(request);
-  }
-};
+buttonNext.onclick = () => getNextSlide();
 
 const sl = document.querySelector('.swiper-wrapper');
-sl.addEventListener('touchmove', () => {
-  console.log('active slide', mySwiper.activeIndex);
-  const slideCount = document.querySelector('.swiper-wrapper').childElementCount;
-
-  if (slideCount - mySwiper.activeIndex === 2) {
-    const request = input.value;
-    page += 1;
-    getMovies(request);
-  }
-});
+sl.addEventListener('touchmove', () => getNextSlide());
