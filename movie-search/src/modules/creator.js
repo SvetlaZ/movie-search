@@ -36,15 +36,9 @@ function createCard(movie) {
   cardName.target = '_blank';
   card.append(cardName);
 
-
-  // const cardPoster = createBlock('div', 'card-poster', '');
-  // if (Poster !== 'N/A') {
-  //   cardPoster.style = `background-image: url(${Poster});`;
-  // }
   const cardPoster = createImage(`${Poster}`, 'card-poster');
   if (Poster === 'N/A') {
     cardPoster.src = './src/picture/poster.jpg';
-    console.log(cardPoster.src);
   }
   card.append(cardPoster);
 

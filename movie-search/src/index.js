@@ -16,7 +16,6 @@ async function submitForm() {
 
   if (isCyrillic(request)) {
     const translateWord = await getTranslate(request);
-    // console.dir(translateWord);
     const { text } = translateWord;
     resultLine.innerText = `No one result founded for ${request}, search for ${text[0]}`;
     preloader.classList.remove('active');
@@ -33,9 +32,7 @@ async function submitForm() {
 }
 
 function getNextSlide() {
-  console.log('active slide', mySwiper.activeIndex);
   const slideCount = document.querySelector('.swiper-wrapper').childElementCount;
-  console.log('slideCount', slideCount);
   if (slideCount - mySwiper.activeIndex <= penultimateSlide) {
     const request = input.value;
     page += 1;

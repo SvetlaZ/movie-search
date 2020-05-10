@@ -1,10 +1,9 @@
 import { createCard } from './creator';
 import mySwiper from './mySwiper';
 
-// const imdbApiKey = '264bae6c'; // убрать в отдельный файл
-const imdbApiKey = '36d4f25d'; // убрать в отдельный файл
-const searchUrl = (name, page) => `https://www.omdbapi.com/?s=${name}&page=${page}&apikey=${imdbApiKey}`; // берем id и totalresults
-const getMovieUrl = (name) => `https://www.omdbapi.com/?i=${name}&apikey=${imdbApiKey}`; // берем title, poster, year, raiting
+const imdbApiKey = '36d4f25d';
+const searchUrl = (name, page) => `https://www.omdbapi.com/?s=${name}&page=${page}&apikey=${imdbApiKey}`;
+const getMovieUrl = (name) => `https://www.omdbapi.com/?i=${name}&apikey=${imdbApiKey}`;
 const numbCardsOnSlide = 1;
 const resultLine = document.querySelector('.response');
 const preloader = document.querySelector('.preloader');
@@ -34,7 +33,6 @@ const getMovies = async (name, page) => {
           .then((movieResponse) => movieResponse.json())),
       );
 
-      console.log('запрос на список фильмов: ', movies);
       movies.forEach((movie) => {
         const lastSlide = document.querySelector('.swiper-slide:last-child');
 

@@ -10,7 +10,6 @@ async function getTranslate(word) {
   const res = await fetch(url);
   const data = await res.json();
 
-  // console.log(data.text[0]);
   return data;
 }
 
