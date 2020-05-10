@@ -92,9 +92,10 @@ input {
 
 .card-poster {
   height: 250px;
-  background-image: url('../src/picture/poster.jpg');
-  background-size: cover;
-  background-position: center;
+  width: 180px;
+  // background-image: url('../src/picture/poster.jpg');
+  // background-size: cover;
+  // background-position: center;
   border-radius: 10px;
 }
 

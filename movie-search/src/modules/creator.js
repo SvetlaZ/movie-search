@@ -6,6 +6,19 @@ function createBlock(type, classname, innerText) {
   return newBlock;
 }
 
+function createImage(src, classname) {
+  const newImage = document.createElement('img');
+  newImage.src = src;
+  newImage.classList.add(classname);
+
+  newImage.onerror = () => {
+    newImage.src = './src/picture/poster.jpg';
+    return newImage.src;
+  };
+
+  return newImage;
+}
+
 function createCard(movie) {
   const {
     Title,
@@ -23,9 +36,15 @@ function createCard(movie) {
   cardName.target = '_blank';
   card.append(cardName);
 
-  const cardPoster = createBlock('div', 'card-poster', '');
-  if (Poster !== 'N/A') {
-    cardPoster.style = `background-image: url(${Poster});`;
+
+  // const cardPoster = createBlock('div', 'card-poster', '');
+  // if (Poster !== 'N/A') {
+  //   cardPoster.style = `background-image: url(${Poster});`;
+  // }
+  const cardPoster = createImage(`${Poster}`, 'card-poster');
+  if (Poster === 'N/A') {
+    cardPoster.src = './src/picture/poster.jpg';
+    console.log(cardPoster.src);
   }
   card.append(cardPoster);
 
