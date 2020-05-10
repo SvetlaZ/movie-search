@@ -1,7 +1,7 @@
 import { createCard } from './creator';
 import mySwiper from './mySwiper';
 
-const imdbApiKey = '36d4f25d';
+const imdbApiKey = '264bae6c';
 const searchUrl = (name, page) => `https://www.omdbapi.com/?s=${name}&page=${page}&apikey=${imdbApiKey}`;
 const getMovieUrl = (name) => `https://www.omdbapi.com/?i=${name}&apikey=${imdbApiKey}`;
 const numbCardsOnSlide = 1;
