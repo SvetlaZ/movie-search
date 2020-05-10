@@ -1,5 +1,3 @@
-import mySwiper from './mySwiper';
-
 function createBlock(type, classname, innerText) {
   const newBlock = document.createElement(type);
   newBlock.classList.add(classname);
@@ -27,14 +25,14 @@ function createCard(movie) {
 
   const cardPoster = createBlock('div', 'card-poster', '');
   if (Poster !== 'N/A') {
-    cardPoster.style = `background-image: url(${Poster})`;
+    cardPoster.style = `background-image: url(${Poster});`;
   }
   card.append(cardPoster);
 
   const cardYear = createBlock('p', 'card-year', Year);
   card.append(cardYear);
 
-  const cardRaiting = createBlock('p', 'card-raiting', imdbRating);
+  const cardRaiting = createBlock('p', 'card-raiting', `IMDB Rating: ${imdbRating}`);
   card.append(cardRaiting);
 }
 
