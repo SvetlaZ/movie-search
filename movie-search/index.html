@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="node_modules/swiper/css/swiper.min.css">
+  <link href="dist/style.css" rel="stylesheet">
+  <title>MovieSearch</title>
+</head>
+<body>
+  <div class="wrapper">
+
+    <header>
+      <h1>MovieSearch</h1>
+    </header>
+
+    <main class="main">
+      <form action=""  autocomplete="false"  class="form">
+        <input type="search" id="search" name="q" placeholder="Search movie" autocomplete="off">
+        <button type="submit">Search</button>
+      </form>
+
+      <p class="response"></p>
+
+      <div class="swiper">
+        <div class="swiper-container">
+          <div class="preloader"></div>
+          <div class="swiper-wrapper"></div>
+          <div class="swiper-pagination"></div>
+
+        </div>
+        
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </main>
+
+    <footer>
+      <p class="footer-text">RS School 2020 q1</p>
+      <a href="https://github.com/SvetlaZ" class="footer-text">Github</a>
+    </footer>
+  </div>
+
+<script src="dist/index.js"></script>    
+</body>
+</html>
